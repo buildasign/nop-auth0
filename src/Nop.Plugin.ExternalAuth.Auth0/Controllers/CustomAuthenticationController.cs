@@ -26,7 +26,7 @@ namespace Nop.Plugin.ExternalAuth.Auth0.Controllers
     {
         #region Fields
 
-        private readonly CustomAuthenticationSettings _basExternalAuthSettings;
+        private readonly CustomAuthenticationSettings _customExternalAuthSettings;
         private readonly IExternalAuthenticationService _externalAuthenticationService;
         private readonly ILocalizationService _localizationService;
         private readonly IOptionsMonitorCache<CookieOptions> _optionsCache;
@@ -40,7 +40,7 @@ namespace Nop.Plugin.ExternalAuth.Auth0.Controllers
 
         #region Ctor
 
-        public CustomAuthenticationController(CustomAuthenticationSettings basExternalAuthSettings,
+        public CustomAuthenticationController(CustomAuthenticationSettings customExternalAuthSettings,
             IExternalAuthenticationService externalAuthenticationService,
             ILocalizationService localizationService,
             IOptionsMonitorCache<CookieOptions> optionsCache,
@@ -51,7 +51,7 @@ namespace Nop.Plugin.ExternalAuth.Auth0.Controllers
             IWebHelper webHelper,
             IHttpContextAccessor httpContextAccessor)
         {
-            _basExternalAuthSettings = basExternalAuthSettings;
+            _customExternalAuthSettings = customExternalAuthSettings;
             this._externalAuthenticationService = externalAuthenticationService;
             this._localizationService = localizationService;
             this._optionsCache = optionsCache;
@@ -76,9 +76,9 @@ namespace Nop.Plugin.ExternalAuth.Auth0.Controllers
 
             var model = new ConfigurationModel
             {
-                ClientId = _basExternalAuthSettings.ClientKeyIdentifier,
-                ClientSecret = _basExternalAuthSettings.ClientSecret,
-                AllowEmployeesNopLogin = _basExternalAuthSettings.AllowEmployeesNopLogin,
+                ClientId = _customExternalAuthSettings.ClientKeyIdentifier,
+                ClientSecret = _customExternalAuthSettings.ClientSecret,
+                AllowEmployeesNopLogin = _customExternalAuthSettings.AllowEmployeesNopLogin,
                 Diagnostics = GetDiagnostics()
             };
 
@@ -98,12 +98,12 @@ namespace Nop.Plugin.ExternalAuth.Auth0.Controllers
                 return Configure();
 
             //save settings
-            _basExternalAuthSettings.ClientKeyIdentifier = model.ClientId;
-            _basExternalAuthSettings.ClientSecret = model.ClientSecret;
-            _basExternalAuthSettings.AllowEmployeesNopLogin = model.AllowEmployeesNopLogin;
-            _settingService.SaveSetting(_basExternalAuthSettings);
+            _customExternalAuthSettings.ClientKeyIdentifier = model.ClientId;
+            _customExternalAuthSettings.ClientSecret = model.ClientSecret;
+            _customExternalAuthSettings.AllowEmployeesNopLogin = model.AllowEmployeesNopLogin;
+            _settingService.SaveSetting(_customExternalAuthSettings);
 
-            //clear BAS authentication options cache
+            //clear authentication options cache
             _optionsCache.TryRemove(CustomAuthenticationDefaults.AuthenticationScheme);
 
             _notificationService.SuccessNotification(_localizationService.GetResource("Admin.Plugins.Saved"));
@@ -113,7 +113,7 @@ namespace Nop.Plugin.ExternalAuth.Auth0.Controllers
 
         public IActionResult Login(string returnUrl = "/")
         {
-            if (string.IsNullOrEmpty(_basExternalAuthSettings.ClientKeyIdentifier) || string.IsNullOrEmpty(_basExternalAuthSettings.ClientSecret))
+            if (string.IsNullOrEmpty(_customExternalAuthSettings.ClientKeyIdentifier) || string.IsNullOrEmpty(_customExternalAuthSettings.ClientSecret))
                 throw new NopException("Custom Authentication module not configured");
 
             //configure login callback action

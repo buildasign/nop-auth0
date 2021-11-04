@@ -4,12 +4,12 @@
 }
 @inject Nop.Core.IWebHelper webHelper
 
-<form asp-controller="BasAuthentication" asp-action="Configure" method="post">
+<form asp-controller="CustomAuthentication" asp-action="Configure" method="post">
     <div class="panel-group">
         <div class="panel panel-default">
             <div class="panel-body">
                 <p>
-                    To configure authentication with BAS Authentication follow these steps:<br />
+                    To configure authentication with Auth0 Authentication follow these steps:<br />
                     <br />
                     <ol>
                         <li>Navigate to the Auth0 administration page and sign in.</li>

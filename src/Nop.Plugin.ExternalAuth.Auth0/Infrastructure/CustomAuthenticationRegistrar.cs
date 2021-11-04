@@ -10,7 +10,7 @@ using Nop.Services.Authentication.External;
 namespace Nop.Plugin.ExternalAuth.Auth0.Infrastructure
 {
     /// <summary>
-    /// Registration of BAS authentication service (plugin)
+    /// Registration of custom authentication service (plugin)
     /// </summary>
     public class CustomAuthenticationRegistrar : IExternalAuthenticationRegistrar
     {

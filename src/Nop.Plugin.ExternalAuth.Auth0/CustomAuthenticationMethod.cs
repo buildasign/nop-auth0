@@ -52,7 +52,7 @@ namespace Nop.Plugin.ExternalAuth.Auth0
             _localizationService.AddOrUpdatePluginLocaleResource("Plugins.ExternalAuth.Auth0.ClientKeyIdentifier", "App ID/API Key");
             _localizationService.AddOrUpdatePluginLocaleResource("Plugins.ExternalAuth.Auth0.ClientKeyIdentifier.Hint", "Enter your app ID/API key here. You can find it on your Auth0 application page.");
             _localizationService.AddOrUpdatePluginLocaleResource("Plugins.ExternalAuth.Auth0.ClientSecret", "App Secret");
-            _localizationService.AddOrUpdatePluginLocaleResource("Plugins.ExternalAuth.Auth0.ClientSecret.Hint", "Enter your app secret here. You can find it on your Cimpress Auth0 application page.");
+            _localizationService.AddOrUpdatePluginLocaleResource("Plugins.ExternalAuth.Auth0.ClientSecret.Hint", "Enter your app secret here. You can find it on your Auth0 application page.");
             _localizationService.AddOrUpdatePluginLocaleResource("Plugins.ExternalAuth.Auth0.AllowEmployeesNopLogin", "Allow NOP Login for Employees.");
             _localizationService.AddOrUpdatePluginLocaleResource("Plugins.ExternalAuth.Auth0.AllowEmployeesNopLogin.Hint", "Allow Employees to sign in via NOP in addition to Auth0.");
 

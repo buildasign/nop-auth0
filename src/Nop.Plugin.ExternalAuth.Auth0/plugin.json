@@ -1,0 +1,11 @@
+﻿{
+	"Group": "ExternalAuth methods",
+	"FriendlyName": "Auth0 Authentication",
+	"SystemName": "ExternalAuth.Auth0",
+	"Version": "1.00",
+	"SupportedVersions": [ "4.20" ],
+	"Author": "BuildASign",
+	"DisplayOrder": 1001,
+	"FileName": "Nop.Plugin.ExternalAuth.Auth0.dll",
+	"Description": "This plugin enables authentication using OpenId Connect/OAuth via an Auth0 provider."
+}

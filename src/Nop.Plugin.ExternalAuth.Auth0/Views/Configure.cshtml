@@ -1,0 +1,81 @@
+﻿@model Nop.Plugin.ExternalAuth.Auth0.Models.ConfigurationModel
+@{
+    Layout = "_ConfigurePlugin";
+}
+@inject Nop.Core.IWebHelper webHelper
+
+<form asp-controller="BasAuthentication" asp-action="Configure" method="post">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>
+                    To configure authentication with BAS Authentication follow these steps:<br />
+                    <br />
+                    <ol>
+                        <li>Navigate to the Auth0 administration page and sign in.</li>
+                        <li>Create your application.</li>
+                        <li>Fill out form for your application client.</li>
+                        <li>Enter your various domains for the <b>Allowed Web Origins</b> and <b>Allowed Logout URLs</b>. Fill out <b>Allowed Origins (CORS)</b> as needed.</li>
+                        <li>Enter "@($"{webHelper.GetStoreLocation()}signin-oidc")" into the <b>Allowed Callback URLs</b> field. Add additional domains as needed.</li>
+                        <li>Click <b>Save</b>.</li>
+                        <li>Copy your Client ID and Client Secret into the App ID and App Secret fields below.</li>
+                        <li><strong>After saving your Client ID and Secret, the app needs the be restarted so that these settings are picked up in the configuration of NOP.</strong></li>
+                    </ol>
+                </p>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="ClientId" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="ClientId" />
+                        <span asp-validation-for="ClientId"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="ClientSecret" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="ClientSecret" />
+                        <span asp-validation-for="ClientSecret"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="AllowEmployeesNopLogin" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="AllowEmployeesNopLogin" />
+                        <span asp-validation-for="AllowEmployeesNopLogin"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-9 col-md-offset-3">
+                        <input type="submit" name="save" class="btn bg-primary" value="@T("Admin.Common.Save")" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <table class="table table-bordered table-hover table-striped dataTable no-footer" width="100%" role="grid">
+                            <thead>
+                                <tr role="row">
+                                    <th>Key</th>
+                                    <th>Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var diag in Model.Diagnostics)
+                                {
+                                    <tr role="row">
+                                        <td>@diag.Key</td>
+                                        <td>@diag.Value</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+</form>
